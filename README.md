@@ -38,7 +38,9 @@ Before you begin, ensure you have met the following requirements:
    ```cd Library-Manager```
 
 3. Update the database connection settings in the Database class to match your MySQL server configuration:  
-    Inside the Database class in database.py  
-``` connection = mysql.connector.connect( ```  
-&nbsp; &nbsp; ```host="localhost", user="root", password="root", database="library" ```  
-   ``` ) ```
+```
+  # Inside the Database class in database.py  
+  connection = mysql.connector.connect(
+        host="localhost", user="root", password="root", database="library"
+    )
+```
