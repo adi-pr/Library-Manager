@@ -10,22 +10,20 @@ from library import Library
 
 
 class Interface:
-    def __init__(self, root, library):
+    def __init__(self, root):
         self.root = root
         self.root.title("Library Manager")
         self.library = Library()
 
         self.tab_control = ttk.Notebook(root)
 
-        self.tabs = Tabs(self.tab_control, library)
+        self.tabs = Tabs(self.tab_control, self.library)
 
         self.tab_control.pack(expand=1, fill="both")
 
 
 if __name__ == "__main__":
     root = tk.Tk()
-    library = Library()
-
-    interface = Interface(root, library)
+    interface = Interface(root)
 
     root.mainloop()
