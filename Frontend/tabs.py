@@ -12,7 +12,7 @@ class Tabs:
         self.tab2 = Tab2()
         
 
-class Tab1(Tabs): 
+class Tab1: 
     def __init__(self):
         
         self.tab = ttk.Frame(Tabs.tab_control)
@@ -21,7 +21,7 @@ class Tab1(Tabs):
         ttk.Button(self.tab, text="Add Book", command=Tabs.library.addBook).grid(column=0, row=0, padx=30, pady=30)
 
         
-class Tab2(Tabs): 
+class Tab2: 
     def __init__(self):
         
         self.tab = ttk.Frame(Tabs.tab_control)
