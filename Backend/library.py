@@ -10,8 +10,8 @@ class InputSource(metaclass=ABCMeta):
 
 
 class Library:
-    def __init__(self, database):
-        self.database = database
+    def __init__(self):
+        self.database = Database()
         self.validator = DataValidator()
 
     def addBook(self):
@@ -19,6 +19,7 @@ class Library:
 
         if self.validator.validate_book(book):
             self.database.writeBook(book)
+            self.database.getBooks()
 
     def getAllBooks(self):
         return self.database.getBooks()
