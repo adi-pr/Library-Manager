@@ -1,6 +1,10 @@
 import sys
 import tkinter as tk
+from tkinter import *
+from tkinter import ttk
+from tabs import Tabs
 
+# Import Library Class
 path = sys.path.insert(0, "Backend")
 from library import Library
 
@@ -11,12 +15,12 @@ class Interface:
         self.root.title("Library Manager")
         self.library = Library()
 
-        self.add_book = tk.Button(
-            self.root,
-            text="Add Book",
-            command=library.addBook
-        )
-        self.add_book.pack()
+        self.tab_control = ttk.Notebook(root)
+
+        self.tabs = Tabs(self.tab_control, library)
+
+        self.tab_control.pack(expand=1, fill="both")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
