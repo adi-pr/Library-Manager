@@ -47,7 +47,7 @@ class Database:
         self.cursor.execute(
             "INSERT INTO books (name, author) VALUES (%s, %s)", (book.title, book.author)
         )
-        print(f"Book: {book.title} added ")
+        print(f"Book:{book.title} by {book.author} added ")
         self.connection.commit()
 
     # Removes a book from the database 
