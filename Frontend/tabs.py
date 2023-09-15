@@ -24,6 +24,9 @@ class AddBookTab:
 
         author_label = ttk.Label(self.tab, text="Author:", anchor="e")
         self.author_entry = ttk.Entry(self.tab)
+        
+        genre_label = ttk.Label(self.tab, text="Genres:", anchor="e")
+        self.genre_entry = ttk.Entry(self.tab)
 
         button_commit = ttk.Button(self.tab, text="Add Book", command=self.addBook)
 
@@ -32,17 +35,22 @@ class AddBookTab:
 
         author_label.grid(row=1, column=0, padx=15, pady=15)
         self.author_entry.grid(row=1, column=1, padx=15, pady=15)
+        
+        genre_label.grid(row=2, column=0, padx=15, pady=15)
+        self.genre_entry.grid(row=2, column=1, padx=15, pady=15)
 
         button_commit.grid(row=10, column=0, columnspan=2, padx=15, pady=15)
         
     def addBook(self):
         title = self.title_entry.get()
         author = self.author_entry.get()
+        genre = self.genre_entry.get()
         
-        Tabs.library.addBook(title, author)
+        Tabs.library.addBook(title, author, genre)
         
         self.title_entry.delete(0, tk.END)
         self.author_entry.delete(0, tk.END)
+        self.genre_entry.delete(0, tk.END)
 
         
 class AddMemberTab: 

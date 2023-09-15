@@ -45,7 +45,7 @@ class Database:
     # Adds a book to the database
     def writeBook(self, book):
         self.cursor.execute(
-            "INSERT INTO books (name, author) VALUES (%s, %s)", (book.title, book.author)
+            "INSERT INTO books (name, author, genre) VALUES (%s, %s, %s)", (book.title, book.author, book.genre)
         )
         print(f"Book:{book.title} by {book.author} added ")
         self.connection.commit()

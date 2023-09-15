@@ -7,8 +7,8 @@ class Library:
         self.database = Database()
         self.validator = DataValidator()
 
-    def addBook(self, title, author):
-        book = Book(title, author)
+    def addBook(self, title, author, genre):
+        book = Book(title, author, genre)
 
         if self.validator.validate_book(book):
             self.database.writeBook(book)
@@ -28,9 +28,10 @@ class Library:
 
 
 class Book():
-    def __init__(self, title, author):
+    def __init__(self, title, author, genre):
         self.title = title
         self.author = author
+        self.genre = genre
 
 
 class Member():
