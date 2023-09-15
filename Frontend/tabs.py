@@ -1,3 +1,4 @@
+import tkinter as tk
 from tkinter import ttk
 
 class Tabs:
@@ -27,7 +28,7 @@ class AddBookTab:
         button_commit = ttk.Button(self.tab, text="Add Book", command=self.addBook)
 
         title_label.grid(row=0, column=0, padx=15, pady=15)
-        self.title_entry.grid(row=0, column=1, padx=15, pady=15)
+        self.title_entry.grid(row=0, column=1, padx=15, pady=15) 
 
         author_label.grid(row=1, column=0, padx=15, pady=15)
         self.author_entry.grid(row=1, column=1, padx=15, pady=15)
@@ -39,6 +40,9 @@ class AddBookTab:
         author = self.author_entry.get()
         
         Tabs.library.addBook(title, author)
+        
+        self.title_entry.delete(0, tk.END)
+        self.author_entry.delete(0, tk.END)
 
         
 class AddMemberTab: 
