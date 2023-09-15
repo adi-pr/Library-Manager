@@ -1,12 +1,5 @@
-from abc import ABCMeta, abstractclassmethod
 from database import Database
 from validation import DataValidator
-
-
-class InputSource(metaclass=ABCMeta):
-    @abstractclassmethod
-    def form_input(cls):
-        pass
 
 
 class Library:
@@ -14,8 +7,8 @@ class Library:
         self.database = Database()
         self.validator = DataValidator()
 
-    def addBook(self):
-        book = Book.form_input()
+    def addBook(self, title, author):
+        book = Book(title, author)
 
         if self.validator.validate_book(book):
             self.database.writeBook(book)
@@ -34,19 +27,13 @@ class Library:
             self.database.writeMember(member)
 
 
-class Book(InputSource):
+class Book():
     def __init__(self, title, author):
         self.title = title
         self.author = author
 
-    @classmethod
-    def form_input(cls):
-        title = input("Title of Book: ")
-        author = input("Author of Book: ")
-        return cls(title, author)
 
-
-class Member(InputSource):
+class Member():
     def __init__(self, firstName, lastName, gender, emailAddress, phoneNumber):
         self.firstName = firstName
         self.lastName = lastName
@@ -54,11 +41,3 @@ class Member(InputSource):
         self.emailAddress = emailAddress
         self.phoneNumber = phoneNumber
 
-    @classmethod
-    def form_input(cls):
-        firstName = input("First Name: ")
-        lastName = input("Last Name: ")
-        gender = input("Gender (M, F, O): ")
-        emailAddress = input("Email: ")
-        phoneNumber = input("Phone Number: ")
-        return cls(firstName, lastName, gender, emailAddress, phoneNumber)
