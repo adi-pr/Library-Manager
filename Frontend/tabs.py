@@ -12,6 +12,7 @@ class Tabs:
 
         self.add_book_tab = AddBookTab()
         self.add_member_tab = AddMemberTab()
+        self.remove_book_tab = RemoveBook()
 
 
 class AddBookTab:
@@ -83,3 +84,27 @@ class AddMemberTab:
 
         for entry in self.entries:
             entry.delete(0, tk.END)
+
+
+class RemoveBook:
+    def __init__(self):
+        self.tab = ttk.Frame(Tabs.tab_control)
+        Tabs.tab_control.add(self.tab, text="Remove Book")
+        
+        label = ttk.Label(self.tab, text="Book ID", anchor="e")
+        label.grid(row=0, column=0, padx=15, pady=15)
+        self.entry = ttk.Entry(self.tab)
+        self.entry.grid(row=0, column=1, padx=15, pady=15)
+        
+        button_commit = ttk.Button(self.tab, text="Remove Book", command=self.removeBook)
+        button_commit.grid(row=1, column=0, columnspan=2, padx=15, pady=15)
+        
+    def removeBook(self):
+        id = self.entry.get()
+        
+        if id == '':
+            return print("Can't be empty string")\
+            
+        Tabs.library.removeBook(id)
+        
+        self.entry.delete(0, tk.END)
