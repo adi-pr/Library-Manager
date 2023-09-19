@@ -17,7 +17,7 @@ class Interface:
 
         self.tab_control = ttk.Notebook(root)
 
-        self.tabs = Tabs(self.tab_control, self.library)
+        self.tabs = Tabs(self.tab_control, self.library) 
 
         self.tab_control.pack(expand=1, fill="both")
 

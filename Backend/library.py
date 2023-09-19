@@ -12,7 +12,7 @@ class Library:
 
         if self.validator.validate_book(book):
             self.database.writeBook(book)
-            self.database.getBooks()
+            self.getAllBooks()
 
     def getAllBooks(self):
         return self.database.getBooks()
@@ -20,18 +20,22 @@ class Library:
     def removeBook(self, id):
         self.database.removeBook(id)
 
-    def addMember(self):
-        member = Member.form_input()
+    def addMember(self, first_name, last_name, gender, email, phone_number):
+        member = Member(first_name, last_name, gender, email, phone_number)
 
         if self.validator.validate_member(member):
             self.database.writeMember(member)
+            self.getAllMembers()
+    
+    def getAllMembers(self):
+        return self.database.getMembers()
 
 
 class Book():
     def __init__(self, title, author, genre):
         self.title = title
         self.author = author
-        self.genre = genre.split(',')
+        self.genre = genre
         
         print(self.genre)
 

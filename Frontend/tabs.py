@@ -1,63 +1,85 @@
 import tkinter as tk
 from tkinter import ttk
 
+
 class Tabs:
     tab_control = None
     library = None
-    
+
     def __init__(self, tab_control, library):
         Tabs.library = library
         Tabs.tab_control = tab_control
-        
+
         self.add_book_tab = AddBookTab()
         self.add_member_tab = AddMemberTab()
-        
 
-class AddBookTab: 
+
+class AddBookTab:
     def __init__(self):
-        
         self.tab = ttk.Frame(Tabs.tab_control)
         Tabs.tab_control.add(self.tab, text="Add Book")
-        
-        title_label = ttk.Label(self.tab, text="Title:", anchor="e")
-        self.title_entry = ttk.Entry(self.tab)
 
-        author_label = ttk.Label(self.tab, text="Author:", anchor="e")
-        self.author_entry = ttk.Entry(self.tab)
-        
-        genre_label = ttk.Label(self.tab, text="Genres:", anchor="e")
-        self.genre_entry = ttk.Entry(self.tab)
+        labels = [
+            "Title:",
+            "Author:", 
+            "Genres:" 
+        ]
 
+        self.entries = [ttk.Entry(self.tab) for _ in labels]
+        
+        for i, labels_text in enumerate(labels):
+            label = ttk.Label(self.tab, text=labels_text, anchor="e")
+            label.grid(row=i, column=0, padx=15, pady=15)
+            self.entries[i].grid(row=i, column=1, padx=15, pady=15)
+
+        # Add Book Button
         button_commit = ttk.Button(self.tab, text="Add Book", command=self.addBook)
+        button_commit.grid(row=len(labels), column=0, columnspan=2, padx=15, pady=15)
 
-        title_label.grid(row=0, column=0, padx=15, pady=15)
-        self.title_entry.grid(row=0, column=1, padx=15, pady=15) 
-
-        author_label.grid(row=1, column=0, padx=15, pady=15)
-        self.author_entry.grid(row=1, column=1, padx=15, pady=15)
-        
-        genre_label.grid(row=2, column=0, padx=15, pady=15)
-        self.genre_entry.grid(row=2, column=1, padx=15, pady=15)
-
-        button_commit.grid(row=10, column=0, columnspan=2, padx=15, pady=15)
-        
     def addBook(self):
-        title = self.title_entry.get()
-        author = self.author_entry.get()
-        genre = self.genre_entry.get()
-        
-        Tabs.library.addBook(title, author, genre)
-        
-        self.title_entry.delete(0, tk.END)
-        self.author_entry.delete(0, tk.END)
-        self.genre_entry.delete(0, tk.END)
+        # Get data from entry bars
+        title = self.entries[0].get()
+        author = self.entries[1].get()
+        genre = self.entries[2].get()
 
-        
-class AddMemberTab: 
+        Tabs.library.addBook(title, author, genre)  # Calls addBook()
+
+        # Clear form upon submit
+        for entry in self.entries:
+            entry.delete(0, tk.END)
+
+
+class AddMemberTab:
     def __init__(self):
-        
         self.tab = ttk.Frame(Tabs.tab_control)
         Tabs.tab_control.add(self.tab, text="Add Member")
-        
-        ttk.Button(self.tab, text="Welcome to the Library Manager").grid(column=0, row=0, padx=30, pady=30)
-        
+
+        labels = [
+            "First Name:",
+            "Last Name:",
+            "Gender:",
+            "Email Address:",
+            "Phone Number:",
+        ]
+
+        self.entries = [ttk.Entry(self.tab) for _ in labels]
+
+        for i, label_text in enumerate(labels):
+            label = ttk.Label(self.tab, text=label_text, anchor="e")
+            label.grid(row=i, column=0, padx=15, pady=15)
+            self.entries[i].grid(row=i, column=1, padx=15, pady=15)
+
+        button_commit = ttk.Button(self.tab, text="Add Member", command=self.addMember)
+        button_commit.grid(row=len(labels), column=0, columnspan=2, padx=15, pady=15)
+
+    def addMember(self):
+        first_name = self.entries[0].get()
+        last_name = self.entries[1].get()
+        gender = self.entries[2].get()
+        email = self.entries[3].get()
+        phone_number = self.entries[4].get()
+
+        Tabs.library.addMember(first_name, last_name, gender, email, phone_number)
+
+        for entry in self.entries:
+            entry.delete(0, tk.END)
