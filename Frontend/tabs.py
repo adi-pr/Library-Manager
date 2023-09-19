@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
+from ctypes import WinDLL
+from PIL import Image, ImageTk
 
 
 class Tabs:
@@ -13,6 +15,7 @@ class Tabs:
         self.add_book_tab = AddBookTab()
         self.add_member_tab = AddMemberTab()
         self.remove_book_tab = RemoveBook()
+        self.remove_member_tab = RemoveMember()
 
 
 class AddBookTab:
@@ -107,4 +110,26 @@ class RemoveBook:
             
         Tabs.library.removeBook(id)
         
+        self.entry.delete(0, tk.END)
+        
+class RemoveMember:
+    def __init__(self):
+        self.tab = ttk.Frame(Tabs.tab_control)
+        Tabs.tab_control.add(self.tab, text="Remove Member")
+        
+        label = ttk.Label(self.tab, text="Member ID", anchor="e")
+        label.grid(row=0, column=0, padx=15, pady=15)
+        self.entry = ttk.Entry(self.tab)
+        self.entry.grid(row=0, column=1, padx=15, pady=15)
+        
+        button_commit = ttk.Button(self.tab, text="Remove Member", command=self.removeMember)
+        button_commit.grid(row=1, column=0, columnspan=2, padx=15, pady=15)
+        
+    def removeMember(self):
+        id = self.entry.get()
+        
+        if id == '':
+            return print("Can't be empty string")\
+            
+        Tabs.library.removeMember(id)        
         self.entry.delete(0, tk.END)

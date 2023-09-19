@@ -92,3 +92,14 @@ class Database:
             # Roll back in the event an error occurs
             self.connection.rollback()
             print(f"An Error Occurred While Adding Member: {member.name}")
+            
+    def removeMember(self, id):
+        print("Removing Member --")
+        try:
+            self.cursor.execute(f"DELETE FROM members WHERE id = {id}")
+            self.connection.commit()
+            print("Member Removed Successfully --")
+        except:
+            # Roll back in the event an error occurs
+            self.connection.rollback()
+            print(f"An Error Occurred While Removing Member: {id}")
